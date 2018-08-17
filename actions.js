@@ -29,14 +29,14 @@ function removeComment(id) {
     }
 };
 
-function ThumbUpComment(id) {
+function thumbUpComment(id) {
     return {
         type: THUMB_UP_COMMENT,
         id
     }
 };
 
-function ThumbDownComment(id) {
+function thumbDownComment(id) {
     return {
         type: THUMB_DOWN_COMMENT,
         id
