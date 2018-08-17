@@ -15,7 +15,7 @@ function comments(state = [], action) {
                     text: action.text,
                     votes: 0
                 }
-                , ...state.comments];
+                , ...state];
         case REMOVE_COMMENT:
             return [
                 state.comments.filter(comment => comment.id !== action.id)
@@ -45,7 +45,7 @@ function comments(state = [], action) {
                 }
                 , ...state.comments.filter(comment => comment.id !== action.id)];
         default:
-            return state.comments;
+            return state;
     }
 };
 
