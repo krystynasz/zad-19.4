@@ -17,33 +17,32 @@ function comments(state = [], action) {
                 }
                 , ...state];
         case REMOVE_COMMENT:
-            return [
-                state.comments.filter(comment => comment.id !== action.id)
-            ];
+            return state.filter(comment => comment.id !== action.id);
         case EDIT_COMMENT:
-            return [
-                {
-                    id: action.id,
-                    text: action.text,
-                    votes: action.votes
+            return state.map(comment => {
+                if (comment.id === action.id) {
+                    return {
+                        id: comment.id,
+                        text: action.text,
+                        votes: comment.votes
+                    }
                 }
-                , ...state.comments.filter(comment => comment.id !== action.id)];
+                return comment;
+            });
         case THUMB_UP_COMMENT:
-            return [
-                {
-                    id: action.id,
-                    text: action.text,
-                    votes: action.votes++
+            return state.map(comment => {
+                if (comment.id === action.id) {
+                    return { ...comment, votes: comment.votes + 1 }
                 }
-                , ...state.comments.filter(comment => comment.id !== action.id)];
+                return comment;
+            });
         case THUMB_DOWN_COMMENT:
-            return [
-                {
-                    id: action.id,
-                    text: action.text,
-                    votes: action.votes--
+            return state.map(comment => {
+                if (comment.id === action.id) {
+                    return { ...comment, votes: comment.votes - 1 }
                 }
-                , ...state.comments.filter(comment => comment.id !== action.id)];
+                return comment;
+            });
         default:
             return state;
     }
